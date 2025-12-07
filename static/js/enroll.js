@@ -144,7 +144,7 @@ function createEventCard(event) {
                         <img src="/api/event/${event.id}/qrcode" 
                             alt="QR Code" 
                             class="img-thumbnail" 
-                            style="width: 80px; height: 80px; cursor: pointer;"
+                            style="width: 120px; height: 120px; cursor: pointer;"
                             onclick="showQRCodeModal(${event.id}, '${event.title.replace(/'/g, "\\'")}')"
                             title="Click to view full QR code">
                         <p class="small text-muted mb-0">Scan to share</p>
@@ -152,7 +152,7 @@ function createEventCard(event) {
                 </div>
                 <div class="card-footer bg-transparent">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn-sm" onclick="enrollEvent(${event.id})">
+                        <button class="btn btn-primary btn-sm" onclick="enrollInEvent(${event.id})">
                             <i class="bi bi-person-plus"></i> Enroll Now
                         </button>
                         <button class="btn btn-outline-secondary btn-sm" onclick="showQRCodeModal(${event.id}, '${event.title.replace(/'/g, "\\'")}')">
@@ -176,7 +176,7 @@ function enrollInEvent(eventId, eventTitle) {
     
     currentEventId = eventId;
     document.getElementById('enrollmentMessage').textContent = 
-        `Are you sure you want to enroll in "${eventTitle}"?`;
+        `Are you sure you want to enroll?`;
     
     const modal = new bootstrap.Modal(document.getElementById('enrollModal'));
     modal.show();
