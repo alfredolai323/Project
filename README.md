@@ -39,7 +39,7 @@ flask_sqlite_project/
 │   ├── index.html           # Home page
 │   ├── enroll.html          # Event enrollment page
 │   ├── create.html          # Event creation page
-│   ├── admin.html           # Admin dashboard
+s│   ├── admin.html           # Admin dashboard
 │   └── admin_login.html     # Admin login page (password required)
 │
 ├── static/                   # Static files
@@ -123,7 +123,7 @@ flask_sqlite_project/
 6. **Access the application**
    Open your browser and navigate to:
    ```
-   http://localhost:5001
+   http://localhost:5000
    ```
 
 ## API Endpoints
