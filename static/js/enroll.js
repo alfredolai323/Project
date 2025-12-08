@@ -102,6 +102,19 @@ function displayEvents(events) {
     eventsList.innerHTML = events.map(event => createEventCard(event)).join('');
 }
 
+// Map event types to image placeholders
+function getEventImagePath(eventType) {
+    const imageMap = {
+        'hiking': '/static/images/hiking/default.jpg',
+        'camping': '/static/images/camping/default.jpg',
+        'cleanup': '/static/images/cleanup/default.jpg',
+        'biking': '/static/images/biking/default.jpg',
+        'climbing': '/static/images/climbing/default.jpg',
+        'other': '/static/images/hiking/default.jpg'
+    };
+    return imageMap[eventType] || imageMap['other'];
+}
+
 // Create event card HTML
 function createEventCard(event) {
     const eventDate = new Date(event.event_date);
@@ -124,27 +137,36 @@ function createEventCard(event) {
         : `${event.enrolled_count} enrolled`;
     
     const isFull = event.max_participants && event.enrolled_count >= event.max_participants;
+    const imagePath = getEventImagePath(event.event_type);
+    
     const eventCard = `
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100 shadow-sm">
+                <div class="position-relative overflow-hidden" style="height: 200px; background-color: #e9ecef;">
+                    <img src="${imagePath}" 
+                         alt="${event.event_type}" 
+                         class="w-100 h-100" 
+                         style="object-fit: cover; object-position: center;"
+                         onerror="this.src='/static/images/hiking/default.jpg'">
+                    <span class="position-absolute top-0 end-0 badge bg-primary m-2">${event.event_type}</span>
+                </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="mb-2">
                         <h5 class="card-title">${event.title}</h5>
-                        <span class="badge bg-primary">${event.event_type}</span>
                     </div>
-                    <p class="card-text text-muted">${event.description}</p>
+                    <p class="card-text text-muted small">${event.description}</p>
                     <div class="event-details mt-3">
                         <p class="mb-1"><i class="bi bi-geo-alt"></i> ${event.location}</p>
                         <p class="mb-1"><i class="bi bi-calendar"></i> ${event.event_date}</p>
                         <p class="mb-1"><i class="bi bi-clock"></i> ${event.event_time}</p>
                     </div>
                     
-                    <!-- QR Code Thumbnail (NEW) -->
+                    <!-- QR Code Thumbnail -->
                     <div class="qr-code-thumbnail mt-3 text-center">
                         <img src="/api/event/${event.id}/qrcode" 
                             alt="QR Code" 
                             class="img-thumbnail" 
-                            style="width: 120px; height: 120px; cursor: pointer;"
+                            style="width: 100px; height: 100px; cursor: pointer;"
                             onclick="showQRCodeModal(${event.id}, '${event.title.replace(/'/g, "\\'")}')"
                             title="Click to view full QR code">
                         <p class="small text-muted mb-0">Scan to share</p>
