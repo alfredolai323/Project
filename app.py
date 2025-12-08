@@ -1,6 +1,6 @@
 # app.py - Main Flask application for Route Venture
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for, send_file
+from flask import Flask, render_template, request, jsonify, redirect, url_for, send_file, session, flash
 import database as db
 from config import config
 
@@ -15,6 +15,7 @@ with app.app_context():
 import qrcode
 import io
 import base64
+import hashlib
 
 @app.route('/api/event/<int:event_id>/qrcode')
 def generate_event_qrcode(event_id):
@@ -96,9 +97,30 @@ def create():
     # Optional: Add authentication check here in production
     return render_template('create.html')
 
+@app.route('/admin/login', methods=['GET','POST'])
+def admin_login():
+    """Admin login page"""
+    error = None
+    if request.method == 'POST':
+        password = request.form.get('password')
+        if password:
+            submitted_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if submitted_hash == app.config.get('ADMIN_PASSWORD_HASH'):
+                session['is_admin'] = True
+                return redirect(url_for('admin_page'))
+        error = 'Invalid password'
+    return render_template('admin_login.html', error=error)
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('is_admin', None)
+    return redirect(url_for('index'))
+
 @app.route('/admin')
 def admin_page():
     """Admin dashboard page"""
+    if not session.get('is_admin'):
+        return redirect(url_for('admin_login'))
     return render_template('admin.html')
 
 # ==================== USER API ENDPOINTS ====================
