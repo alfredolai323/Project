@@ -29,7 +29,7 @@ Route Venture is a platform that connects outdoor enthusiasts to explore nature 
 ```
 flask_sqlite_project/
 │
-├── app.py                    # Main Flask application
+├── app.py                    # Main Flask application (login routes added)
 ├── database.py               # Database operations
 ├── config.py                 # Configuration settings
 ├── requirements.txt          # Python dependencies
@@ -39,7 +39,8 @@ flask_sqlite_project/
 │   ├── index.html           # Home page
 │   ├── enroll.html          # Event enrollment page
 │   ├── create.html          # Event creation page
-│   └── admin.html           # Admin dashboard
+│   ├── admin.html           # Admin dashboard
+│   └── admin_login.html     # Admin login page (password required)
 │
 ├── static/                   # Static files
 │   ├── css/
@@ -122,7 +123,7 @@ flask_sqlite_project/
 6. **Access the application**
    Open your browser and navigate to:
    ```
-   http://localhost:5000
+   http://localhost:5001
    ```
 
 ## API Endpoints
