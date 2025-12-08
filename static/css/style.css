@@ -811,6 +811,25 @@ main {
     width: var(--space-20);
 }
 
+/* Event Card Images */
+.card img {
+    transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.qr-code-thumbnail img {
+    transition: transform var(--duration-fast) var(--ease-standard);
+    border: 2px solid var(--color-border);
+}
+
+.qr-code-thumbnail img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 /* Buttons */
 .btn {
     transition: all var(--duration-normal) var(--ease-standard);

@@ -39,16 +39,25 @@ flask_sqlite_project/
 │   ├── index.html           # Home page
 │   ├── enroll.html          # Event enrollment page
 │   ├── create.html          # Event creation page
-s│   ├── admin.html           # Admin dashboard
-│   └── admin_login.html     # Admin login page (password required)
+│   ├── admin.html           # Admin dashboard
+│   ├── admin_login.html     # Admin login page (password required)
+│   └── contact.html         # Contact page
 │
 ├── static/                   # Static files
 │   ├── css/
 │   │   └── style.css        # Custom styles
-│   └── js/
-│       ├── enroll.js        # Enrollment page logic
-│       ├── create.js        # Event creation logic
-│       └── admin.js         # Admin dashboard logic
+│   ├── js/
+│   │   ├── enroll.js        # Enrollment page logic
+│   │   ├── create.js        # Event creation logic
+│   │   └── admin.js         # Admin dashboard logic
+│   └── images/              # Image assets
+│       ├── background.jpg   # Login page background image
+│       ├── hiking/          # Hiking event images
+│       ├── camping/         # Camping event images
+│       ├── biking/          # Biking event images
+│       ├── climbing/        # Climbing event images
+│       ├── cleanup/         # Community cleanup event images
+│       └── heroes/          # Hero section images (future use)
 │
 └── route_venture.db         # SQLite database (auto-created)
 ```
